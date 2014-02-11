@@ -9,7 +9,10 @@ post '/' do
 end
 
 post '/ajax_tweet' do
-  p params
-  CLIENT.update(params[:tweet_text])
-  "Great success".to_json
+  begin
+    CLIENT.update(params[:tweet_text])
+    "Great success!"
+  rescue
+    "Error: your tweet was not tweeted you twat."
+  end
 end
