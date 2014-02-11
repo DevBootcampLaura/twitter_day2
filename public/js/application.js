@@ -1,7 +1,21 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  $('#form').submit(function(e) {
+    e.preventDefault();
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+    var tweet = {tweet_text: $("#tweet_text").val()};
+    $('#tweet_text').prop('disabled', true);
+    $(".container").append("<img id='balls' src='ajax-loader.gif'/>")
+    $.ajax({
+      type: "POST",
+      url: "/ajax_tweet",
+      data: tweet,
+      success: function(){
+        $("#balls").remove();
+        $(".container").append("<h1 id='success'>Great Success!</h1>").fadeIn(500);
+        $("#success").delay(1000).fadeOut(500);
+        $('#tweet_text').prop('disabled', false);
+        $('#tweet_text').val("");
+      }
+    });
+  });
 });
