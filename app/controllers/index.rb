@@ -1,7 +1,9 @@
 get '/' do
-  # Look in app/views/index.erb
+  @user = CLIENT.user
   erb :index
 end
 
 post '/' do
+  CLIENT.update(params[:tweet_text])
+  redirect '/'
 end
