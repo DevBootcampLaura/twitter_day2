@@ -9,10 +9,10 @@ $(document).ready(function() {
       type: "POST",
       url: "/ajax_tweet",
       data: tweet,
-      success: function(){
+      success: function(response){
         $("#balls").remove();
-        $(".container").append("<h1 id='success'>Great Success!</h1>").fadeIn(500);
-        $("#success").delay(1000).fadeOut(500);
+        $("#success").html("<h1>"+response+"</h1>").fadeIn(500);
+        $("#success").delay(2000).fadeOut(500);
         $('#tweet_text').prop('disabled', false);
         $('#tweet_text').val("");
       }
